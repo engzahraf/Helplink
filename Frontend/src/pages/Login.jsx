@@ -5,22 +5,40 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState("");
 
   const handleLogin = (e) => {
     e.preventDefault();
 
+    setError("");
+
+    // Check empty fields
     if (!email || !password) {
-      alert("Please enter your email and password.");
+      setError("Please enter your email and password.");
       return;
     }
 
-    alert("Login button clicked!");
+    // Check email format
+    if (!email.includes("@")) {
+      setError("Please enter a valid email address.");
+      return;
+    }
+
+    // Check password length
+    if (password.length < 6) {
+      setError("Password must contain at least 6 characters.");
+      return;
+    }
+
+    // Temporary frontend test
+    alert("Login successful! Backend connection will be added later.");
   };
 
   return (
     <div className="login-page">
       <div className="login-card">
 
+        {/* Logo / System Name */}
         <div className="logo">
           HelpLink
         </div>
@@ -33,10 +51,12 @@ function Login() {
 
         <form onSubmit={handleLogin}>
 
+          {/* Email */}
           <div className="input-group">
-            <label>Email Address</label>
+            <label htmlFor="email">Email Address</label>
 
             <input
+              id="email"
               type="email"
               placeholder="Enter your email"
               value={email}
@@ -44,11 +64,14 @@ function Login() {
             />
           </div>
 
+          {/* Password */}
           <div className="input-group">
-            <label>Password</label>
+            <label htmlFor="password">Password</label>
 
             <div className="password-container">
+
               <input
+                id="password"
                 type={showPassword ? "text" : "password"}
                 placeholder="Enter your password"
                 value={password}
@@ -62,10 +85,22 @@ function Login() {
               >
                 {showPassword ? "Hide" : "Show"}
               </button>
+
             </div>
           </div>
 
-          <button type="submit" className="login-button">
+          {/* Error message */}
+          {error && (
+            <p className="error-message">
+              {error}
+            </p>
+          )}
+
+          {/* Login button */}
+          <button
+            type="submit"
+            className="login-button"
+          >
             Login
           </button>
 
