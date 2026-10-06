@@ -1,11 +1,15 @@
 import { useState, type FormEvent } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
+
+  const navigate = useNavigate();
+  const { login } = useAuth();
 
   const handleLogin = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -33,7 +37,10 @@ function Login() {
     }
 
     // Temporary frontend login
-    alert("Login successful! Backend connection will be added later.");
+    // Backend authentication will be connected later.
+    login(email, "student");
+
+    navigate("/student-dashboard");
   };
 
   return (
