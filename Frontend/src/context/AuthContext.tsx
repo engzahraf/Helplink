@@ -1,9 +1,16 @@
-import { createContext, useContext, useState, type ReactNode } from "react";
+
+import {
+  createContext,
+  useContext,
+  useState,
+  type ReactNode,
+} from "react";
 
 interface AuthContextType {
   isAuthenticated: boolean;
   userRole: string | null;
-  login: (email: string, role: string) => void;
+  token: string | null;
+  login: (token: string, email: string, role: string) => void;
   logout: () => void;
 }
 
@@ -14,24 +21,36 @@ interface AuthProviderProps {
 }
 
 export function AuthProvider({ children }: AuthProviderProps) {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [userRole, setUserRole] = useState<string | null>(null);
+  const [token, setToken] = useState<string | null>(
+    () => localStorage.getItem("token")
+  );
 
-  const login = (email: string, role: string) => {
-    setIsAuthenticated(true);
-    setUserRole(role);
+  const [userRole, setUserRole] = useState<string | null>(
+    () => localStorage.getItem("userRole")
+  );
 
-    // Temporary storage until backend authentication is connected
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(
+    () => Boolean(localStorage.getItem("token"))
+  );
+
+  const login = (token: string, email: string, role: string) => {
+    localStorage.setItem("token", token);
     localStorage.setItem("userEmail", email);
     localStorage.setItem("userRole", role);
+
+    setToken(token);
+    setUserRole(role);
+    setIsAuthenticated(true);
   };
 
   const logout = () => {
-    setIsAuthenticated(false);
-    setUserRole(null);
-
+    localStorage.removeItem("token");
     localStorage.removeItem("userEmail");
     localStorage.removeItem("userRole");
+
+    setToken(null);
+    setUserRole(null);
+    setIsAuthenticated(false);
   };
 
   return (
@@ -39,6 +58,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       value={{
         isAuthenticated,
         userRole,
+        token,
         login,
         logout,
       }}
@@ -57,3 +77,4 @@ export function useAuth() {
 
   return context;
 }
+
