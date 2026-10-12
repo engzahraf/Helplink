@@ -36,5 +36,9 @@ QUICKSTART.md
 FILE_REFERENCE.md
 DEVELOPMENT_GUIDE.md
 
-backend/QUICKSTART.md
-backend/PROJECT_SUMMARY.md
+
+# Exclude local documentation files
+QUICKSTART.md
+PROJECT_SUMMARY.md
+# Aiven SSL certificate
+ca.pem
