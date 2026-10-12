@@ -30,3 +30,11 @@ Thumbs.db
 # Build
 dist/
 build/
+
+PROJECT_SUMMARY.md
+QUICKSTART.md
+FILE_REFERENCE.md
+DEVELOPMENT_GUIDE.md
+
+backend/QUICKSTART.md
+backend/PROJECT_SUMMARY.md
