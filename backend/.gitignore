@@ -40,3 +40,5 @@ DEVELOPMENT_GUIDE.md
 # Exclude local documentation files
 QUICKSTART.md
 PROJECT_SUMMARY.md
+# Aiven SSL certificate
+ca.pem

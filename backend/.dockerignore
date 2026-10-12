@@ -1,0 +1,19 @@
+
+# Environment variables and secrets
+.env
+.env.*
+
+# Dependencies
+node_modules/
+
+# Git
+.git
+.gitignore
+
+# Logs
+*.log
+npm-debug.log*
+
+# Temporary files
+*.tmp
+*.swp
