@@ -26,6 +26,7 @@ function StudentDashboard() {
       <main className="dashboard-content">
         <section className="welcome-section">
           <h2>Welcome to HelpLink 👋</h2>
+
           <p>
             Manage your support requests and get help from the administration
             team.
@@ -33,20 +34,28 @@ function StudentDashboard() {
         </section>
 
         <section className="dashboard-cards">
+
+          {/* Submit Support Request */}
           <div className="dashboard-card">
             <h3>Submit Support Request</h3>
+
             <p>
               Create a new support request and explain the issue you need help
               with.
             </p>
 
-            <button className="dashboard-button">
+            <button
+              className="dashboard-button"
+              onClick={() => navigate("/submit-request")}
+            >
               Submit Request
             </button>
           </div>
 
+          {/* My Requests */}
           <div className="dashboard-card">
             <h3>My Requests</h3>
+
             <p>
               View and track the support requests you have already submitted.
             </p>
@@ -56,8 +65,10 @@ function StudentDashboard() {
             </button>
           </div>
 
+          {/* Profile */}
           <div className="dashboard-card">
             <h3>Profile</h3>
+
             <p>
               View and update your personal information and account settings.
             </p>
@@ -67,8 +78,10 @@ function StudentDashboard() {
             </button>
           </div>
 
+          {/* Notifications */}
           <div className="dashboard-card">
             <h3>Notifications</h3>
+
             <p>
               Check updates and responses related to your support requests.
             </p>
@@ -77,10 +90,11 @@ function StudentDashboard() {
               View Notifications
             </button>
           </div>
+
         </section>
       </main>
     </div>
   );
 }
 
-export default StudentDashboard;
+export default StudentDashboard; 
