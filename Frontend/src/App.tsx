@@ -6,21 +6,22 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import StudentDashboard from "./pages/StudentDashboard";
 import SubmitRequest from "./pages/SubmitRequest";
+import MyRequests from "./pages/MyRequests";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { AuthProvider } from "./context/AuthContext";
+import Profile from "./pages/Profile";
+import Notifications from "./pages/Notifications";
+import AdminDashboard from "./pages/AdminDashboard";
 
 function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
         <Routes>
-          {/* Login page */}
           <Route path="/" element={<Login />} />
 
-          {/* Registration page */}
           <Route path="/register" element={<Register />} />
 
-          {/* Student dashboard */}
           <Route
             path="/student-dashboard"
             element={
@@ -30,7 +31,6 @@ function App() {
             }
           />
 
-          {/* Submit support request page */}
           <Route
             path="/submit-request"
             element={
@@ -39,6 +39,19 @@ function App() {
               </ProtectedRoute>
             }
           />
+
+          <Route
+            path="/my-requests"
+            element={
+              <ProtectedRoute>
+                <MyRequests />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+          <Route path="/notifications" element={<ProtectedRoute><Notifications /></ProtectedRoute>} />
+          <Route path="/admin-dashboard" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
+          <Route path="*" element={<Login />} />
         </Routes>
       </BrowserRouter>
     </AuthProvider>

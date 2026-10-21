@@ -7,11 +7,13 @@ interface ProtectedRouteProps {
 }
 
 function ProtectedRoute({ children }: ProtectedRouteProps) {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, userRole } = useAuth();
+  const isAdminPage = window.location.pathname.startsWith("/admin");
 
   if (!isAuthenticated) {
     return <Navigate to="/" replace />;
   }
+  if (isAdminPage && userRole !== "admin") return <Navigate to="/student-dashboard" replace />;
 
   return <>{children}</>;
 }

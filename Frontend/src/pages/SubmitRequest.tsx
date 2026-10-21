@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
+import { api } from "../lib/api";
 
 function SubmitRequest() {
   const navigate = useNavigate();
@@ -10,8 +11,9 @@ function SubmitRequest() {
   const [priority, setPriority] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     setError("");
@@ -32,14 +34,13 @@ function SubmitRequest() {
       return;
     }
 
-    // Temporary frontend submission.
-    // Backend API will be connected later.
-    setSuccess("Support request submitted successfully!");
-
-    setTitle("");
-    setDescription("");
-    setCategory("");
-    setPriority("");
+    setIsLoading(true);
+    try {
+      await api("/support-requests", { method: "POST", body: JSON.stringify({ title, description, category, priority }) });
+      setSuccess("Your request was submitted successfully.");
+      setTitle(""); setDescription(""); setCategory(""); setPriority("");
+    } catch (err) { setError(err instanceof Error ? err.message : "Could not submit your request."); }
+    finally { setIsLoading(false); }
   };
 
   return (
@@ -103,7 +104,8 @@ function SubmitRequest() {
                 <option value="Academic">Academic</option>
                 <option value="Technical">Technical</option>
                 <option value="Administrative">Administrative</option>
-                <option value="Hostel">Hostel</option>
+                <option value="Financial">Financial</option>
+                <option value="Accommodation">Accommodation</option>
                 <option value="Other">Other</option>
               </select>
             </div>
@@ -128,8 +130,8 @@ function SubmitRequest() {
             {success && <p className="success-message">{success}</p>}
 
             <div className="request-form-buttons">
-              <button type="submit" className="dashboard-button">
-                Submit Request
+              <button type="submit" className="dashboard-button" disabled={isLoading}>
+                {isLoading ? "Submitting…" : "Submit Request"}
               </button>
 
               <button
