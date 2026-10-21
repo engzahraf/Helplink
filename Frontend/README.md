@@ -1,32 +1,22 @@
-# React + TypeScript + Vite
+# HelpLink frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+The HelpLink frontend is a React and TypeScript single-page application built with Vite. It provides the student sign-in and registration flow, request management, profile and notification pages, and the administrator request workspace.
 
-Currently, two official plugins are available:
+## Development
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Install dependencies and start the Vite server:
 
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```sh
+npm install
+npm run dev
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+The Vite development server proxies `/api` requests to `http://localhost:5000`. Start the backend separately. To use another API base URL, set `VITE_API_URL` in the frontend environment.
+
+## Production build
+
+```sh
+npm run build
+```
+
+The Dockerfile creates a production build and serves it through Nginx on port 80. Nginx forwards `/api` calls to the `backend` service, and serves the React application for client-side routes.
