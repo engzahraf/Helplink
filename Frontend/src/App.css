@@ -169,6 +169,11 @@
 .admin-label { margin-left: 6px; vertical-align: middle; background: #e2f5eb; color: #176b55; letter-spacing: 0; }
 .request-id { color: #718096; font-size: 12px; font-weight: 650; }
 .status-actions { display: flex; gap: 9px; margin-top: 18px; }
+.admin-reply { display: grid; gap: 9px; margin-top: 20px; padding-top: 18px; border-top: 1px solid #e8edf2; }
+.admin-reply label { color: #334155; font-size: 14px; font-weight: 650; }
+.admin-reply textarea { width: 100%; padding: 12px 14px; border: 1px solid #cbd5e1; border-radius: 9px; resize: vertical; }
+.admin-reply textarea:focus { outline: none; border-color: #176b55; box-shadow: 0 0 0 3px rgba(23,107,85,.12); }
+.success-inline { align-self: center; color: #176b55; font-size: 14px; font-weight: 650; }
 @media (max-width: 600px) { .dashboard-header { padding: 16px 20px; } .dashboard-content { padding: 30px 18px 48px; } .stats-grid { grid-template-columns: 1fr; } .request-heading, .notification-card { flex-direction: column; align-items: stretch; } .request-heading > .status { align-self: flex-start; } }
 .password-wrapper {
   position: relative;
